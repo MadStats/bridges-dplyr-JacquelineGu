@@ -34,9 +34,11 @@ min2dec = function(x){
 }
 
 data16=mutate(data16,latitude=min2dec(LAT_016),longitude= min2dec(LONG_017))
+#select the data that is useful, and sort the bridges that are built most recently( after 2000).
 x=filter(data16,latitude<49,latitude>25,longitude<140,longitude>70,YEAR_BUILT_027>=2000)
+x = mutate(x, fips = STATE_CODE_001*1000+COUNTY_CODE_003)
 
-ggplot(data = x) +geom_point(mapping = aes(y = latitude, x =longitude))
+ggplot(data = x) +geom_point(mapping = aes(y = latitude, x =longitude,col=fips))
 
 
   
